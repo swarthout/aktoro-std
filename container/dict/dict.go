@@ -17,16 +17,17 @@ type Dict struct {
 func New(kvs ...keyValue) Dict {
 	d := Dict{set.New()}
 	if len(kvs) > 0 {
-		for _, kv := range kvs {
-			d = Put(d, kv.key, kv.value)
-		}
+		d = Put(d, kvs...)
 	}
 	return d
 }
 
 // Put inserts a key-value pair into a map.
-func Put(d Dict, k set.Entry, v interface{}) Dict {
-	return Dict{d.set.Put(NewKeyValue(k, v))}
+func Put(d Dict, kvs ...keyValue) Dict {
+	for _, kv := range kvs {
+		d = Dict{d.set.Put(kv)}
+	}
+	return d
 }
 
 // Delete deletes a pair of a key and a value from a map.
