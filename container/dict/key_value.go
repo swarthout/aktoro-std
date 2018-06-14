@@ -7,7 +7,7 @@ type keyValue struct {
 	value interface{}
 }
 
-func newKeyValue(k set.Entry, v interface{}) keyValue {
+func NewKeyValue(k set.Entry, v interface{}) keyValue {
 	return keyValue{k, v}
 }
 
