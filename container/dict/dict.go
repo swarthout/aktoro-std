@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	"github.com/aktoro-lang/container/set"
-	"github.com/aktoro-lang/enum"
 )
 
 // Dict represents a map (associative array).
@@ -56,10 +55,10 @@ func Member(d Dict, k set.Entry) bool {
 // FirstRest returns a key-value pair in a map and a rest of the map.
 // This method is useful for iteration.
 // The key and value would be nil if the map is empty.
-func (d Dict) FirstRest() (interface{}, enum.Enum, bool) {
+func (d Dict) FirstRest() (interface{}, Dict, bool) {
 	e, s, ok := d.set.FirstRest()
 	d = Dict{s}
-	return e, enum.Enum(d), ok
+	return e, d, ok
 }
 
 // Size returns a size of a map.
@@ -70,12 +69,12 @@ func Size(d Dict) int {
 func (d Dict) String() string {
 	buffer := []string{}
 	var el interface{}
-	var rest enum.Enum
+	var rest Dict
 	var kv keyValue
 	var ok bool
 	for {
 		if el, rest, ok = d.FirstRest(); ok {
-			d = rest.(Dict)
+			d = rest
 			kv = el.(keyValue)
 			buffer = append(buffer, fmt.Sprintf("%v => %v", kv.key, kv.value))
 		} else {

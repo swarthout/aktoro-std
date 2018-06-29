@@ -107,3 +107,72 @@ func Drop(l *List, n types.AkInt) *List {
 	listStart, _ := nth(l, n)
 	return listStart
 }
+
+func Reverse(l *List) interface{} {
+	newList := New()
+	var el interface{}
+	var ok bool
+	for {
+		if el, l, ok = l.FirstRest(); ok {
+			newList = Cons(newList, el)
+		} else {
+			return newList
+		}
+	}
+}
+
+func Map(l *List, f func(interface{}) interface{}) interface{} {
+	newList := New()
+	var el interface{}
+	var ok bool
+	for {
+		if el, l, ok = l.FirstRest(); ok {
+			newList = Cons(newList, f(el))
+		} else {
+			break
+		}
+	}
+	return Reverse(newList)
+}
+
+func Reduce(l *List, f func(interface{}, interface{}) interface{}, acc interface{}) interface{} {
+	var el interface{}
+	var ok bool
+	for {
+		if el, l, ok = l.FirstRest(); ok {
+			acc = f(acc, el)
+		} else {
+			break
+		}
+	}
+	return acc
+}
+
+func Filter(l *List, f func(interface{}) interface{}) interface{} {
+	newList := New()
+	var el interface{}
+	var ok bool
+	for {
+		if el, l, ok = l.FirstRest(); ok {
+			if f(el).(bool) {
+				newList = Cons(newList, el)
+			}
+		} else {
+			break
+		}
+	}
+	return Reverse(newList)
+}
+
+func Each(l *List, f func(interface{}) interface{}) interface{} {
+	var el interface{}
+	var ok bool
+	for {
+		if el, l, ok = l.FirstRest(); ok {
+			f(el)
+		} else {
+			break
+		}
+	}
+	return nil
+}
