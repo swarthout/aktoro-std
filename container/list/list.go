@@ -70,7 +70,7 @@ func nth(l *List, n types.AkInt) (*List, bool) {
 	for i := types.AkInt(0); ; i++ {
 		_, rest, ok = l.FirstRest()
 		if !ok {
-			return nil, false
+			return l, false
 		} else if i == n {
 			return l, true
 		}
@@ -78,34 +78,135 @@ func nth(l *List, n types.AkInt) (*List, bool) {
 	}
 }
 
+func emptyList() *List {
+	return &List{nil, nil, false}
+}
+
 // GetRange returns a list from index low to high, makes a copy of the list
 func GetRange(l *List, low types.AkInt, high types.AkInt) *List {
-	var first, cur, prev *List
+	var first, curr, prev *List
 	orig, ok := nth(l, low)
 	if !ok {
 		return nil
 	}
-	for i := low; i <= high; i++ {
-		cur = &List{orig.value, nil, false}
+	for i := low; i < high; i++ {
+		curr = &List{orig.value, nil, false}
 		if first == nil {
-			first = cur
+			first = curr
 			first.ok = true
 		}
 		if prev != nil {
-			prev.next = cur
+			prev.next = curr
 			prev.ok = true
 		}
-		prev = cur
+		prev = curr
 		orig = orig.next
 	}
-	prev.next = &List{nil, nil, false}
+	prev.next = emptyList()
+	prev.ok = true
 	return first
 }
 
+func Take(l *List, n types.AkInt) interface{} {
+	firstN := GetRange(l, types.AkInt(0), n)
+	return firstN
+}
+
+func Sort(l *List) interface{} {
+	if ! l.ok || !l.next.ok {
+		return l
+	}
+	var less func(interface{}, interface{}) interface{}
+	switch l.value.(type) {
+	case types.AkInt:
+		less = func(p0 interface{}, p1 interface{}) interface{} {
+			a := p0.(types.AkInt)
+			b := p1.(types.AkInt)
+			return a < b
+		}
+	case types.AkFloat:
+		less = func(p0 interface{}, p1 interface{}) interface{} {
+			a := p0.(types.AkFloat)
+			b := p1.(types.AkFloat)
+			return a < b
+		}
+	case types.AkString:
+		less = func(p0 interface{}, p1 interface{}) interface{} {
+			a := p0.(types.AkString)
+			b := p1.(types.AkString)
+			return a < b
+		}
+	}
+	return SortBy(l, less)
+}
+
+func SortBy(l *List, less func(interface{}, interface{}) interface{}) interface{} {
+	if !l.ok || !l.next.ok {
+		return l
+	}
+	left, right := split(l)
+
+	left = SortBy(left, less).(*List)
+	right = SortBy(right, less).(*List)
+	return merge(left, right, less)
+}
+func merge(left *List, right *List, less func(interface{}, interface{}) interface{}) *List {
+	if !left.ok {
+		return right
+	}
+	if !right.ok {
+		return left
+	}
+	if less(left.value, right.value).(bool) {
+		return Cons(merge(left.next, right, less), left.value)
+	} else {
+		return Cons(merge(left, right.next, less), right.value)
+	}
+}
+func split(source *List) (*List, *List) {
+	if !source.ok || !source.next.ok {
+		return source, emptyList()
+	}
+	first := source.value
+	second := source.next.value
+	left, right := split(source.next.next)
+	return Cons(left, first), Cons(right, second)
+}
+
 // Drop returns a list with the first n elements removed
-func Drop(l *List, n types.AkInt) *List {
+func Drop(l *List, n types.AkInt) interface{} {
 	listStart, _ := nth(l, n)
 	return listStart
+}
+
+func All(l *List, f func(interface{}) interface{}) interface{} {
+	var el interface{}
+	var ok bool
+	for {
+		if el, l, ok = l.FirstRest(); ok {
+			if !f(el).(bool) {
+				return false
+			}
+		} else {
+			break
+		}
+	}
+	return true
+}
+
+func Any(l *List, f func(interface{}) interface{}) interface{} {
+	var el interface{}
+	var ok bool
+	for {
+		if el, l, ok = l.FirstRest(); ok {
+			if f(el).(bool) {
+				return true
+			}
+		} else {
+			break
+		}
+	}
+	return false
 }
 
 func Reverse(l *List) interface{} {
@@ -122,20 +223,35 @@ func Reverse(l *List) interface{} {
 }
 
 func Map(l *List, f func(interface{}) interface{}) interface{} {
-	newList := New()
+	var head, curr, prev *List
 	var el interface{}
 	var ok bool
 	for {
 		if el, l, ok = l.FirstRest(); ok {
-			newList = Cons(newList, f(el))
+			curr = &List{f(el), nil, false}
+			if head == nil {
+				head = curr
+				head.ok = true
+			}
+			if prev != nil {
+				prev.next = curr
+				prev.ok = true
+			}
+			prev = curr
 		} else {
+			if head == nil {
+				return emptyList()
+			}
 			break
 		}
+
 	}
-	return Reverse(newList)
+	prev.next = emptyList()
+	prev.ok = true
+	return head
 }
 
-func Reduce(l *List, f func(interface{}, interface{}) interface{}, acc interface{}) interface{} {
+func Reduce(l *List, acc interface{}, f func(interface{}, interface{}) interface{}) interface{} {
 	var el interface{}
 	var ok bool
 	for {
@@ -149,19 +265,34 @@ func Reduce(l *List, f func(interface{}, interface{}) interface{}, acc interface
 }
 
 func Filter(l *List, f func(interface{}) interface{}) interface{} {
-	newList := New()
+	var head, curr, prev *List
 	var el interface{}
 	var ok bool
 	for {
 		if el, l, ok = l.FirstRest(); ok {
 			if f(el).(bool) {
-				newList = Cons(newList, el)
+				curr = &List{el, nil, false}
 			}
+			if head == nil {
+				head = curr
+				head.ok = true
+			}
+			if prev != nil {
+				prev.next = curr
+				prev.ok = true
+			}
+			prev = curr
 		} else {
+			if head == nil {
+				return emptyList()
+			}
 			break
 		}
+
 	}
-	return Reverse(newList)
+	prev.next = emptyList()
+	prev.ok = true
+	return head
 }
 
 func Each(l *List, f func(interface{}) interface{}) interface{} {
