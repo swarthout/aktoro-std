@@ -209,6 +209,48 @@ func Any(l *List, f func(interface{}) interface{}) interface{} {
 	return false
 }
 
+func Find(l *List, f func(interface{}) interface{}) interface{} {
+	var el interface{}
+	var ok bool
+	for {
+		if el, l, ok = l.FirstRest(); ok {
+			if f(el).(bool) {
+				return el
+			}
+		} else {
+			break
+		}
+	}
+	return nil
+}
+
+func FindIndex(l *List, f func(interface{}) interface{}) interface{} {
+	var el interface{}
+	var ok bool
+	index := 0
+	for {
+		if el, l, ok = l.FirstRest(); ok {
+			if f(el).(bool) {
+				return index
+			}
+		} else {
+			break
+		}
+		index++
+	}
+	return nil
+}
+
+func First(l *List) interface{} {
+	el, _, _ := l.FirstRest()
+	return el
+}
+
+func Rest(l *List) interface{} {
+	_, rest, _ := l.FirstRest()
+	return rest
+}
+
 func Reverse(l *List) interface{} {
 	newList := New()
 	var el interface{}
