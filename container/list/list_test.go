@@ -66,3 +66,67 @@ func TestSortByCars(t *testing.T) {
 	fmt.Println("by age: ", sorted)
 
 }
+
+func TestDropWhile(t *testing.T) {
+	xs := New(0, 1, 2, 3, 4, 5, 6)
+	lessThanFour := func(p0 interface{}) interface{} {
+		return p0.(int) < 4
+	}
+	small := DropWhile(xs, lessThanFour)
+	fmt.Println(small)
+}
+
+func TestTake(t *testing.T) {
+	empty := New()
+	var leftover interface{}
+	leftover = Take(empty, types.AkInt(0))
+	fmt.Println("take 0 []", leftover)
+	x := New(types.AkInt(8))
+	leftover = Take(x, types.AkInt(0))
+	fmt.Println("take 0 [8]", leftover)
+	leftover = Take(x, types.AkInt(1))
+	fmt.Println("take 1 [8]", leftover)
+	leftover = Take(x, types.AkInt(2))
+	fmt.Println("take 2 [8]", leftover)
+	xs := New(types.AkInt(2011), types.AkInt(2009), types.AkInt(2018))
+	leftover = Take( xs, types.AkInt(0))
+	fmt.Println("take 0 [2011, 2009, 2018]",leftover)
+	leftover = Take(xs, types.AkInt(1))
+	fmt.Println("take 1 [2011, 2009, 2018]",leftover)
+	leftover = Take(xs, types.AkInt(2))
+	fmt.Println("take 2 [2011, 2009, 2018]",leftover)
+	leftover = Take(xs, types.AkInt(4))
+	fmt.Println("take 4 [2011, 2009, 2018]",leftover)
+}
+
+func TestDrop(t *testing.T) {
+	empty := New()
+	var leftover interface{}
+	leftover = Drop(empty, types.AkInt(0))
+	fmt.Println("drop 0 []", leftover)
+	x := New(types.AkInt(8))
+	leftover = Drop(x, types.AkInt(0))
+	fmt.Println("drop 0 [8]", leftover)
+	leftover = Drop(x, types.AkInt(1))
+	fmt.Println("drop 1 [8]", leftover)
+	leftover = Drop(x, types.AkInt(2))
+	fmt.Println("drop 2 [8]", leftover)
+	xs := New(types.AkInt(2011), types.AkInt(2009), types.AkInt(2018))
+	leftover = Drop( xs, types.AkInt(0))
+	fmt.Println("drop 0 [2011, 2009, 2018]",leftover)
+	leftover = Drop(xs, types.AkInt(1))
+	fmt.Println("drop 1 [2011, 2009, 2018]",leftover)
+	leftover = Drop(xs, types.AkInt(2))
+	fmt.Println("drop 2 [2011, 2009, 2018]",leftover)
+	leftover = Drop(xs, types.AkInt(4))
+	fmt.Println("drop 4 [2011, 2009, 2018]",leftover)
+}
+
+func TestLength(t *testing.T) {
+	empty := New()
+	x := New(types.AkInt(8))
+	xs := New(types.AkInt(2011), types.AkInt(2009), types.AkInt(2018))
+	fmt.Println(Length(empty))
+	fmt.Println(Length(x))
+	fmt.Println(Length(xs))
+}

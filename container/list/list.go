@@ -87,9 +87,12 @@ func GetRange(l *List, low types.AkInt, high types.AkInt) *List {
 	var first, curr, prev *List
 	orig, ok := nth(l, low)
 	if !ok {
-		return nil
+		return emptyList()
 	}
 	for i := low; i < high; i++ {
+		if !orig.ok {
+			break
+		}
 		curr = &List{orig.value, nil, false}
 		if first == nil {
 			first = curr
@@ -107,9 +110,16 @@ func GetRange(l *List, low types.AkInt, high types.AkInt) *List {
 	return first
 }
 
-func Take(l *List, n types.AkInt) interface{} {
-	firstN := GetRange(l, types.AkInt(0), n)
-	return firstN
+func Length(l *List) interface{} {
+	i := 0
+	var ok bool
+	for {
+		if _, l, ok = l.FirstRest(); ok {
+			i++
+		} else {
+			return i
+		}
+	}
 }
 
 func Sort(l *List) interface{} {
@@ -173,10 +183,71 @@ func split(source *List) (*List, *List) {
 	return Cons(left, first), Cons(right, second)
 }
 
+func Take(l *List, n types.AkInt) interface{} {
+	var first, curr, prev *List
+	orig := l
+	if !l.ok || n == 0 {
+		return emptyList()
+	}
+	for i := types.AkInt(0); i < n; i++ {
+		if !orig.ok {
+			break
+		}
+		curr = &List{orig.value, nil, false}
+		if first == nil {
+			first = curr
+			first.ok = true
+		}
+		if prev != nil {
+			prev.next = curr
+			prev.ok = true
+		}
+		prev = curr
+		orig = orig.next
+	}
+	prev.next = emptyList()
+	prev.ok = true
+	return first
+}
+
 // Drop returns a list with the first n elements removed
 func Drop(l *List, n types.AkInt) interface{} {
-	listStart, _ := nth(l, n)
-	return listStart
+	//listStart, _ := nth(l, n)
+	//return listStart
+	var ok bool
+	orig := l
+	if !l.ok || n == 0 {
+		return l
+	}
+	for i := types.AkInt(0); i < n; i++ {
+		if !orig.ok {
+			break
+		}
+		if _, l, ok = orig.FirstRest(); ok {
+			orig = l
+		} else {
+			break
+		}
+	}
+	return l
+}
+
+func DropWhile(l *List, f func(interface{}) interface{}) interface{} {
+	orig := l
+	var el interface{}
+	var ok bool
+	for {
+		if el, l, ok = orig.FirstRest(); ok {
+			if !f(el).(bool) {
+				break
+			}
+			orig = l
+		} else {
+			break
+		}
+
+	}
+	return l
 }
 
 func All(l *List, f func(interface{}) interface{}) interface{} {
