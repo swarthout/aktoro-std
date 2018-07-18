@@ -123,7 +123,7 @@ func Length(l *List) interface{} {
 }
 
 func Sort(l *List) interface{} {
-	if ! l.ok || !l.next.ok {
+	if !l.ok || !l.next.ok {
 		return l
 	}
 	var less func(interface{}, interface{}) interface{}
