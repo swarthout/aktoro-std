@@ -1,6 +1,8 @@
 package types
 
-import "github.com/aktoro-lang/container/set"
+import (
+	"github.com/aktoro-lang/container/set"
+)
 
 // AkString is the base string type for aktoro
 type AkString string
@@ -80,3 +82,34 @@ func (i AkBool) Equal(e set.Entry) bool {
 
 	return i == j
 }
+
+type AkOption interface {
+	AkOption()
+}
+
+type Some struct {
+	P0 interface{}
+}
+
+func (Some) AkOption() {}
+
+type None struct {
+}
+
+func (None) AkOption() {}
+
+type AkResult interface {
+	AkResult()
+}
+
+type Ok struct {
+	P0 interface{}
+}
+
+func (Ok) AkResult() {}
+
+type Err struct {
+	P0 AkString
+}
+
+func (Err) AkResult() {}
