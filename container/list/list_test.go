@@ -74,6 +74,19 @@ func TestDropWhile(t *testing.T) {
 	}
 	small := DropWhile(xs, lessThanFour)
 	fmt.Println(small)
+	small = DropWhile(New(), lessThanFour)
+	fmt.Println(small)
+}
+
+func TestTakeWhile(t *testing.T) {
+	xs := New(0, 1, 2, 3, 4, 5, 6)
+	lessThanFour := func(p0 interface{}) interface{} {
+		return p0.(int) < 4
+	}
+	small := TakeWhile(xs, lessThanFour)
+	fmt.Println(small)
+	small = TakeWhile(New(), lessThanFour)
+	fmt.Println(small)
 }
 
 func TestTake(t *testing.T) {

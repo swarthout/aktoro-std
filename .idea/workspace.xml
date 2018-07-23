@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cbeab29-104b-4fc7-8cce-205dbe1bfec4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/container/list/list.go" beforeDir="false" afterPath="$PROJECT_DIR$/container/list/list.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/container/list/list_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/container/list/list_test.go" afterDir="false" />
     </list>
@@ -24,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="list.go" pinned="false" current-in-tab="false">
+      <file leaf-file-name="list.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/container/list/list.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="215" column="22" selection-start-line="215" selection-start-column="22" selection-end-line="215" selection-end-column="22" />
+            <state relative-caret-position="433">
+              <caret line="350" column="11" selection-start-line="350" selection-start-column="11" selection-end-line="350" selection-end-column="11" />
               <folding>
                 <element signature="e#14#75#0" expanded="true" />
               </folding>
@@ -45,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="list_test.go" pinned="false" current-in-tab="true">
+      <file leaf-file-name="list_test.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/container/list/list_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
-              <caret line="75" column="22" lean-forward="true" selection-start-line="75" selection-start-column="22" selection-end-line="75" selection-end-column="22" />
+            <state relative-caret-position="280">
+              <caret line="76" column="42" lean-forward="true" selection-start-line="76" selection-start-column="42" selection-end-line="76" selection-end-column="42" />
               <folding>
                 <element signature="e#14#42#0" expanded="true" />
               </folding>
@@ -76,6 +75,7 @@
       <find>length</find>
       <find>size</find>
       <find>leng</find>
+      <find>First(</find>
     </findStrings>
   </component>
   <component name="GOROOT" path="C:\Go" />
@@ -86,8 +86,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/container/dict/dict.go" />
-        <option value="$PROJECT_DIR$/container/list/list.go" />
         <option value="$PROJECT_DIR$/container/list/list_test.go" />
+        <option value="$PROJECT_DIR$/container/list/list.go" />
       </list>
     </option>
   </component>
@@ -101,9 +101,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-11" />
-    <option name="width" value="1940" />
-    <option name="height" value="2111" />
+    <option name="x" value="1599" />
+    <option name="y" value="640" />
+    <option name="width" value="1941" />
+    <option name="height" value="2051" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -168,7 +169,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Test.TestDrop in github.com/aktoro-lang/container/list">
+  <component name="RunManager" selected="Go Test.TestDropWhile in github.com/aktoro-lang/container/list">
     <configuration name="TestDrop in github.com/aktoro-lang/container/list" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="aktoro-lang" />
       <working_directory value="$PROJECT_DIR$/container/list" />
@@ -202,17 +203,6 @@
       <filePath value="$PROJECT_DIR$/" />
       <pattern value="^TestLength$" />
     </configuration>
-    <configuration name="TestSortByCars in github.com/aktoro-lang/container/list" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="aktoro-lang" />
-      <working_directory value="$PROJECT_DIR$/container/list" />
-      <go_parameters value="-i" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="github.com/aktoro-lang/container/list" />
-      <directory value="$PROJECT_DIR$/" />
-      <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^TestSortByCars$" />
-    </configuration>
     <configuration name="TestTake in github.com/aktoro-lang/container/list" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="aktoro-lang" />
       <working_directory value="$PROJECT_DIR$/container/list" />
@@ -224,60 +214,71 @@
       <filePath value="$PROJECT_DIR$/" />
       <pattern value="^TestTake$" />
     </configuration>
+    <configuration name="TestTakeWhile in github.com/aktoro-lang/container/list" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="aktoro-lang" />
+      <working_directory value="$PROJECT_DIR$/container/list" />
+      <go_parameters value="-i" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/aktoro-lang/container/list" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestTakeWhile$" />
+    </configuration>
     <list>
-      <item itemvalue="Go Test.TestSortByCars in github.com/aktoro-lang/container/list" />
       <item itemvalue="Go Test.TestDropWhile in github.com/aktoro-lang/container/list" />
       <item itemvalue="Go Test.TestTake in github.com/aktoro-lang/container/list" />
       <item itemvalue="Go Test.TestLength in github.com/aktoro-lang/container/list" />
       <item itemvalue="Go Test.TestDrop in github.com/aktoro-lang/container/list" />
+      <item itemvalue="Go Test.TestTakeWhile in github.com/aktoro-lang/container/list" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestDropWhile in github.com/aktoro-lang/container/list" />
+        <item itemvalue="Go Test.TestTakeWhile in github.com/aktoro-lang/container/list" />
         <item itemvalue="Go Test.TestDrop in github.com/aktoro-lang/container/list" />
         <item itemvalue="Go Test.TestLength in github.com/aktoro-lang/container/list" />
         <item itemvalue="Go Test.TestTake in github.com/aktoro-lang/container/list" />
-        <item itemvalue="Go Test.TestDropWhile in github.com/aktoro-lang/container/list" />
-        <item itemvalue="Go Test.TestSortByCars in github.com/aktoro-lang/container/list" />
       </list>
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="TestTake_in_github_com_aktoro-lang_container_list - 2018.07.01 at 13h 07m 11s.xml">
-      <configuration name="TestTake in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestDropWhile_in_github_com_aktoro-lang_container_list - 2018.07.01 at 20h 23m 10s.xml">
+      <configuration name="TestDropWhile in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestTake_in_github_com_aktoro-lang_container_list - 2018.07.01 at 13h 07m 19s.xml">
-      <configuration name="TestTake in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestDropWhile_in_github_com_aktoro-lang_container_list - 2018.07.01 at 20h 23m 22s.xml">
+      <configuration name="TestDropWhile in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestTake_in_github_com_aktoro-lang_container_list - 2018.07.01 at 13h 07m 27s.xml">
-      <configuration name="TestTake in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestTakeWhile_in_github_com_aktoro-lang_container_list - 2018.07.01 at 20h 23m 27s.xml">
+      <configuration name="TestTakeWhile in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestTake_in_github_com_aktoro-lang_container_list - 2018.07.01 at 13h 09m 25s.xml">
-      <configuration name="TestTake in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestTakeWhile_in_github_com_aktoro-lang_container_list - 2018.07.01 at 20h 25m 18s.xml">
+      <configuration name="TestTakeWhile in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestTake_in_github_com_aktoro-lang_container_list - 2018.07.01 at 13h 10m 01s.xml">
-      <configuration name="TestTake in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestTakeWhile_in_github_com_aktoro-lang_container_list - 2018.07.01 at 20h 26m 36s.xml">
+      <configuration name="TestTakeWhile in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestTake_in_github_com_aktoro-lang_container_list - 2018.07.01 at 13h 10m 10s.xml">
-      <configuration name="TestTake in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestTakeWhile_in_github_com_aktoro-lang_container_list - 2018.07.01 at 20h 26m 47s.xml">
+      <configuration name="TestTakeWhile in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestTake_in_github_com_aktoro-lang_container_list - 2018.07.01 at 13h 10m 34s.xml">
-      <configuration name="TestTake in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestDropWhile_in_github_com_aktoro-lang_container_list - 2018.07.01 at 20h 39m 40s.xml">
+      <configuration name="TestDropWhile in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestLength_in_github_com_aktoro-lang_container_list - 2018.07.01 at 13h 18m 10s.xml">
-      <configuration name="TestLength in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestTakeWhile_in_github_com_aktoro-lang_container_list - 2018.07.01 at 20h 40m 07s.xml">
+      <configuration name="TestTakeWhile in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestLength_in_github_com_aktoro-lang_container_list - 2018.07.01 at 13h 18m 23s.xml">
-      <configuration name="TestLength in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestTakeWhile_in_github_com_aktoro-lang_container_list - 2018.07.01 at 20h 40m 59s.xml">
+      <configuration name="TestTakeWhile in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestDrop_in_github_com_aktoro-lang_container_list - 2018.07.01 at 20h 05m 39s.xml">
-      <configuration name="TestDrop in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestDropWhile_in_github_com_aktoro-lang_container_list - 2018.07.01 at 20h 41m 04s.xml">
+      <configuration name="TestDropWhile in github.com/aktoro-lang/container/list" configurationId="GoTestRunConfiguration" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1293" height="1407" extended-state="0" />
+    <frame x="1066" y="427" width="1294" height="1367" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17904612" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17890625" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.3298969" />
       <window_info anchor="right" id="Database" order="3" />
@@ -307,11 +308,12 @@
     <MESSAGE value="start list higher-order functions" />
     <MESSAGE value="add merge sort" />
     <MESSAGE value="find, firstrest" />
-    <option name="LAST_COMMIT_MESSAGE" value="find, firstrest" />
+    <MESSAGE value="takes and drops" />
+    <option name="LAST_COMMIT_MESSAGE" value="takes and drops" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="11" />
+      <option name="time" value="12" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -442,22 +444,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/container/list/list.go">
+    <entry file="file://$PROJECT_DIR$/container/list/list_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="215" column="22" selection-start-line="215" selection-start-column="22" selection-end-line="215" selection-end-column="22" />
+        <state relative-caret-position="280">
+          <caret line="76" column="42" lean-forward="true" selection-start-line="76" selection-start-column="42" selection-end-line="76" selection-end-column="42" />
           <folding>
-            <element signature="e#14#75#0" expanded="true" />
+            <element signature="e#14#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/container/list/list_test.go">
+    <entry file="file://$PROJECT_DIR$/container/list/list.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="75" column="22" lean-forward="true" selection-start-line="75" selection-start-column="22" selection-end-line="75" selection-end-column="22" />
+        <state relative-caret-position="433">
+          <caret line="350" column="11" selection-start-line="350" selection-start-column="11" selection-end-line="350" selection-end-column="11" />
           <folding>
-            <element signature="e#14#42#0" expanded="true" />
+            <element signature="e#14#75#0" expanded="true" />
           </folding>
         </state>
       </provider>

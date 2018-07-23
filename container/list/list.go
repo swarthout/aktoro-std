@@ -122,6 +122,10 @@ func Length(l *List) interface{} {
 	}
 }
 
+func Empty(l *List) interface{} {
+	return types.AkBool(!l.ok)
+}
+
 func Sort(l *List) interface{} {
 	if ! l.ok || !l.next.ok {
 		return l
@@ -210,6 +214,38 @@ func Take(l *List, n types.AkInt) interface{} {
 	return first
 }
 
+func TakeWhile(l *List, f func(interface{}) interface{}) interface{} {
+	var first, curr, prev *List
+	orig := l
+	for {
+		if orig.ok {
+			if !f(orig.value).(types.AkBool) {
+				break
+			}
+			curr = &List{orig.value, nil, false}
+			if first == nil {
+				first = curr
+				first.ok = true
+			}
+			if prev != nil {
+				prev.next = curr
+				prev.ok = true
+			}
+			prev = curr
+			orig = orig.next
+		} else {
+			if first == nil {
+				return emptyList()
+			}
+			break
+		}
+
+	}
+	prev.next = emptyList()
+	prev.ok = true
+	return first
+}
+
 // Drop returns a list with the first n elements removed
 func Drop(l *List, n types.AkInt) interface{} {
 	//listStart, _ := nth(l, n)
@@ -238,8 +274,8 @@ func DropWhile(l *List, f func(interface{}) interface{}) interface{} {
 	var ok bool
 	for {
 		if el, l, ok = orig.FirstRest(); ok {
-			if !f(el).(bool) {
-				break
+			if !f(el).(types.AkBool) {
+				return orig
 			}
 			orig = l
 		} else {
@@ -255,7 +291,7 @@ func All(l *List, f func(interface{}) interface{}) interface{} {
 	var ok bool
 	for {
 		if el, l, ok = l.FirstRest(); ok {
-			if !f(el).(bool) {
+			if !f(el).(types.AkBool) {
 				return false
 			}
 		} else {
@@ -270,7 +306,7 @@ func Any(l *List, f func(interface{}) interface{}) interface{} {
 	var ok bool
 	for {
 		if el, l, ok = l.FirstRest(); ok {
-			if f(el).(bool) {
+			if f(el).(types.AkBool) {
 				return true
 			}
 		} else {
@@ -285,7 +321,7 @@ func Find(l *List, f func(interface{}) interface{}) interface{} {
 	var ok bool
 	for {
 		if el, l, ok = l.FirstRest(); ok {
-			if f(el).(bool) {
+			if f(el).(types.AkBool) {
 				return el
 			}
 		} else {
@@ -301,7 +337,7 @@ func FindIndex(l *List, f func(interface{}) interface{}) interface{} {
 	index := 0
 	for {
 		if el, l, ok = l.FirstRest(); ok {
-			if f(el).(bool) {
+			if f(el).(types.AkBool) {
 				return index
 			}
 		} else {
@@ -383,7 +419,7 @@ func Filter(l *List, f func(interface{}) interface{}) interface{} {
 	var ok bool
 	for {
 		if el, l, ok = l.FirstRest(); ok {
-			if f(el).(bool) {
+			if f(el).(types.AkBool) {
 				curr = &List{el, nil, false}
 			}
 			if head == nil {
