@@ -83,6 +83,10 @@ func (i AkBool) Equal(e set.Entry) bool {
 	return i == j
 }
 
+type AkVariant interface {
+	AkVariantConstructor()
+}
+
 type AkOption interface {
 	AkOption()
 }
@@ -93,10 +97,14 @@ type Some struct {
 
 func (Some) AkOption() {}
 
+func (Some) AkVariantConstructor() {}
+
 type None struct {
 }
 
 func (None) AkOption() {}
+
+func (None) AkVariantConstructor() {}
 
 type AkResult interface {
 	AkResult()
@@ -108,8 +116,12 @@ type Ok struct {
 
 func (Ok) AkResult() {}
 
+func (Ok) AkVariantConstructor() {}
+
 type Err struct {
 	P0 AkString
 }
 
 func (Err) AkResult() {}
+
+func (Err) AkVariantConstructor() {}
